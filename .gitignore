@@ -12,6 +12,3 @@ htmlcov/
 dist/
 build/
 *.egg-info/
-
-flaskpg/
-flaskpg/*

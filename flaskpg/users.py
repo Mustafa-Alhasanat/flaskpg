@@ -1,42 +1,12 @@
-from flask import Flask, request, jsonify, make_response
-from flask_sqlalchemy import SQLAlchemy
-from flask_restx import Api, Resource, fields, reqparse
-from pydantic import BaseModel
+from flask import Blueprint
+from flask_restx import Resource
 from flask_pydantic import validate
 
-
-app = Flask(__name__)
-api = Api(app)
-
-app.config["SQLALCHEMY_DATABASE_URI"] = 'postgresql://mustafa:hasanat123@localhost/accounts'
-db = SQLAlchemy(app)
-
-user_model = api.model(
-    'user',
-    {
-        'email':  fields.String("email@email.com", required=True),
-        'password':  fields.String("1234", required=True),
-        'age':  fields.Integer(20, required=True),
-    }
-)
+from flaskpg import api, user_model, db
+from flaskpg.account import Account, Body
 
 
-class Account(db.Model):
-    _id = db.Column("id", db.Integer, primary_key=True)
-    email = db.Column("email", db.String(100))
-    password = db.Column("password", db.String(20))
-    age = db.Column("age", db.Integer)
-
-    def __init__(self, email=None, password=None, age=None):
-        self.email = email
-        self.password = password
-        self.age = age
-
-
-class Body(BaseModel):
-  email: str
-  password: str
-  age: int
+users_blueprint = Blueprint("account", __name__, static_folder="static", template_folder="templates")
 
 
 @api.route("/users/<int:id>")
@@ -91,7 +61,6 @@ class User(Resource):
         except:
             return "server error", 500
 
-
 @api.route("/users/")
 class Users(Resource):
     def get(self):
@@ -134,6 +103,3 @@ class Users(Resource):
         except:  
             return "Server Error", 500
 
-
-if __name__ == "__main__":
-    app.run(debug=True, port=5001)

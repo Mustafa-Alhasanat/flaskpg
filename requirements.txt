@@ -17,6 +17,7 @@ platformdirs==2.5.2
 psycopg2-binary==2.9.3
 pydantic==1.9.1
 pyrsistent==0.18.1
+python-dotenv==0.20.0
 pytz==2022.1
 six==1.16.0
 SQLAlchemy==1.4.39
