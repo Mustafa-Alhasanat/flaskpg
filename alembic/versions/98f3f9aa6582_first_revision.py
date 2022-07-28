@@ -1,8 +1,8 @@
-"""create account table
+"""first revision
 
-Revision ID: 05d6abe0f157
-Revises: c95e25374455
-Create Date: 2022-07-27 15:00:51.363926
+Revision ID: 98f3f9aa6582
+Revises: 
+Create Date: 2022-07-28 12:19:54.117432
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '05d6abe0f157'
-down_revision = 'c95e25374455'
+revision = '98f3f9aa6582'
+down_revision = None
 branch_labels = None
 depends_on = None
 
